@@ -14,5 +14,6 @@ For all of the example apps you will need to
 ### Chirp + Spotify
 
 Build a streaming music player for Spotify using a Raspberry Pi, with a remote control that uses sound to transfer data.
+Use with the accompanying [chrome extension](https://chrome.google.com/webstore/detail/chirp-spotify/iepiajcokedpnhcafddeahecjliijlla)
 
 See the [instructable](https://www.instructables.com/id/Spotify-Music-Player-With-Chirp-Connect)
