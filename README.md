@@ -11,6 +11,13 @@ For all of the example apps you will need to
 
 ----
 
+### Example
+
+A simple example script that sends out a random chirp, and then continuously listens out for further chirps.
+This is used as an introduction to the Python SDK.
+
+----
+
 ### Chirp + Spotify
 
 Build a streaming music player for Spotify using a Raspberry Pi, with a remote control that uses sound to transfer data.
