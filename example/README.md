@@ -9,8 +9,8 @@ if one if not specified, the default configuration set in
 [developers.chirp.io](https://developers.chirp.io) will be downloaded from the
 network and used.
 
-The script will print out the available input/output devices, and point to the
-default devices. You may find that on some platforms you may find you need to
+The script will print out the available audio i/o devices, and point to the
+default audio devices. You may find that on some platforms you may find you need to
 explicitly set the input/output device. Use the desired device index with the
 `-i` and `-o` parameters accordingly to change devices.
 
