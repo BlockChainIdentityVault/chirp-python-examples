@@ -41,17 +41,24 @@ def decode(payload):
 
 class Callbacks(CallbackSet):
 
+    def on_receiving(self, channel):
+        print('Receiving data...')
+
     def on_received(self, payload, channel):
         if len(payload) == 23:
             decode(list(payload))
 
 
-def main(app_key, app_secret, app_config, input_device):
+def main(input_device):
 
     # Initialise Connect SDK
-    sdk = ChirpConnect(app_key, app_secret, app_config)
+    sdk = ChirpConnect()
     print(str(sdk))
     print(sdk.audio.query_devices())
+
+    if sdk.protocol_name != 'standard':
+        raise RuntimeError('Must use the standard protocol ' +
+            'to be compatible with other Chirp Messenger apps.')
 
     # Configure audio
     sdk.audio.frame_size = 4096
@@ -78,10 +85,7 @@ if __name__ == '__main__':
         description='Chirp | Spotify',
         epilog='Listens out for spotify codes and plays them with modipy-spotify'
     )
-    parser.add_argument('key', help='Chirp application key')
-    parser.add_argument('secret', help='Chirp application secret')
-    parser.add_argument('config', help='Path to config file (optional)', nargs='?')
     parser.add_argument('-i', type=int, default=None, help='Input device index (optional)')
     args = parser.parse_args()
 
-    main(args.key, args.secret, args.config, args.i)
+    main(args.i)

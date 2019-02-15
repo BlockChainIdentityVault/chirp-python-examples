@@ -1,4 +1,4 @@
-# Example
+# Demo
 
 This script sends out a random chirp, then continuously listens out for chirps.
 It accepts a Chirp app key and secret as required parameters, you can retrieve
@@ -21,7 +21,7 @@ shouldn't need to use these.
 ## Usage
 
 ```bash
-Chirp Connect SDK Example
+ChirpSDK Demo
 
 positional arguments:
   key         Chirp application key

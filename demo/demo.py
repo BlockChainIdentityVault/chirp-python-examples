@@ -81,7 +81,7 @@ def main(app_key, app_secret, app_config,
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='Chirp Connect SDK Example',
+        description='ChirpSDK Demo',
         epilog='Sends a random chirp payload, then continuously listens for chirps'
     )
     parser.add_argument('key', help='Chirp application key')
