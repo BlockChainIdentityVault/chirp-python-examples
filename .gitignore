@@ -111,3 +111,5 @@ _build
 
 # mac system files
 *.DS_Store
+
+*.wav
