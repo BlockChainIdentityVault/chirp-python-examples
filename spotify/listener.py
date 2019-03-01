@@ -77,7 +77,6 @@ def main(input_device):
         print('Exiting')
 
     sdk.stop()
-    sdk.close()
 
 
 if __name__ == '__main__':

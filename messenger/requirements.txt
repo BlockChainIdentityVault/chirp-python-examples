@@ -1,1 +1,1 @@
-chirpsdk==3.4.4
+chirpsdk==3.4.5

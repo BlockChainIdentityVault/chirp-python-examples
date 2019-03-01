@@ -52,7 +52,6 @@ def main(args):
         print('Exiting')
 
     sdk.stop()
-    sdk.close()
 
 
 if __name__ == '__main__':

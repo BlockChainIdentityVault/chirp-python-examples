@@ -39,12 +39,11 @@ class Callbacks(CallbackSet):
                 data=list(payload), ch=channel))
 
 
-def main(app_key, app_secret, app_config,
-         input_device, output_device,
+def main(block_name, input_device, output_device,
          block_size, sample_rate):
 
     # Initialise ConnectSDK
-    sdk = ChirpConnect(app_key, app_secret, app_config)
+    sdk = ChirpConnect(block=block_name)
     print(str(sdk))
     print('Protocol: {protocol} [v{version}]'.format(
         protocol=sdk.protocol_name,
@@ -76,7 +75,6 @@ def main(app_key, app_secret, app_config,
         print('Exiting')
 
     sdk.stop()
-    sdk.close()
 
 
 if __name__ == '__main__':
@@ -84,13 +82,11 @@ if __name__ == '__main__':
         description='ChirpSDK Demo',
         epilog='Sends a random chirp payload, then continuously listens for chirps'
     )
-    parser.add_argument('key', help='Chirp application key')
-    parser.add_argument('secret', help='Chirp application secret')
-    parser.add_argument('-c', help='Path to config file (optional)')
+    parser.add_argument('-c', help='The configuration block [name] in your ~/.chirprc file (optional)')
     parser.add_argument('-i', type=int, default=None, help='Input device index (optional)')
     parser.add_argument('-o', type=int, default=None, help='Output device index (optional)')
     parser.add_argument('-b', type=int, default=0, help='Block size (optional)')
     parser.add_argument('-s', type=int, default=44100, help='Sample rate (optional)')
     args = parser.parse_args()
 
-    main(args.key, args.secret, args.c, args.i, args.o, args.b, args.s)
+    main(args.c, args.i, args.o, args.b, args.s)
