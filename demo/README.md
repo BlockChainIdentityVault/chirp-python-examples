@@ -18,8 +18,7 @@ explicitly set the input/output device. Use the desired device index with the
 There are also options to alter the block size and sample rate, however you
 shouldn't need to use these.
 
-
-## Usage
+## Usage
 
 ```bash
 ChirpSDK Demo
