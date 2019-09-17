@@ -2,7 +2,7 @@ import argparse
 import sys
 import time
 
-from chirpsdk import ChirpConnect, CallbackSet, CHIRP_CONNECT_STATE
+from chirpsdk import ChirpSDK, CallbackSet, CHIRP_SDK_STATE
 
 
 class Callbacks(CallbackSet):
@@ -10,8 +10,8 @@ class Callbacks(CallbackSet):
     def on_state_changed(self, previous_state, current_state):
         """ Called when the SDK's state has changed """
         print('State changed from {} to {}'.format(
-            CHIRP_CONNECT_STATE.get(previous_state),
-            CHIRP_CONNECT_STATE.get(current_state)))
+            CHIRP_SDK_STATE.get(previous_state),
+            CHIRP_SDK_STATE.get(current_state)))
 
     def on_sending(self, payload, channel):
         """ Called when a chirp has started to be transmitted """
@@ -42,8 +42,8 @@ class Callbacks(CallbackSet):
 def main(block_name, input_device, output_device,
          block_size, sample_rate):
 
-    # Initialise ConnectSDK
-    sdk = ChirpConnect(block=block_name)
+    # Initialise Chirp SDK
+    sdk = ChirpSDK(block=block_name)
     print(str(sdk))
     print('Protocol: {protocol} [v{version}]'.format(
         protocol=sdk.protocol_name,

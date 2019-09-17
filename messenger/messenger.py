@@ -1,8 +1,7 @@
 import argparse
-import os
 import time
 
-from chirpsdk import ChirpConnect, CallbackSet
+from chirpsdk import ChirpSDK, CallbackSet
 
 
 class Callbacks(CallbackSet):
@@ -22,7 +21,7 @@ def main(args):
     # ------------------------------------------------------------------------
     # Initialise the Connect SDK.
     # ------------------------------------------------------------------------
-    sdk = ChirpConnect()
+    sdk = ChirpSDK()
     print(sdk.audio.query_devices())
     print(str(sdk))
     sdk.audio.output_device = args.o
@@ -31,7 +30,7 @@ def main(args):
 
     if sdk.protocol_name != '16khz-mono':
         raise RuntimeError('Must use the 16khz-mono protocol ' +
-            'to be compatible with other Chirp Messenger apps.')
+                           'to be compatible with other Chirp Messenger apps.')
 
     # ------------------------------------------------------------------------
     # Parse unicode and send as a chirp payload
