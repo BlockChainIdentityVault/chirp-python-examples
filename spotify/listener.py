@@ -6,7 +6,7 @@ import argparse
 import subprocess
 import time
 
-from chirpsdk import ChirpConnect, CallbackSet, CHIRP_CONNECT_STATE
+from chirpsdk import ChirpSDK, CallbackSet, CHIRP_SDK_STATE
 
 # Short identifiers
 USER_ID = '\xfa'
@@ -51,14 +51,14 @@ class Callbacks(CallbackSet):
 
 def main(input_device):
 
-    # Initialise Connect SDK
-    sdk = ChirpConnect()
+    # Initialise Chirp SDK
+    sdk = ChirpSDK()
     print(str(sdk))
     print(sdk.audio.query_devices())
 
     if sdk.protocol_name != 'standard':
         raise RuntimeError('Must use the standard protocol ' +
-            'to be compatible with other Chirp Messenger apps.')
+                           'to be compatible with other Chirp Messenger apps.')
 
     # Configure audio
     sdk.audio.frame_size = 4096

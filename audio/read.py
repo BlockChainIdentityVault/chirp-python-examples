@@ -4,11 +4,9 @@ read.py
 Read a chirp payload from an audio file.
 """
 import argparse
-import os
-import sys
 import wave
 
-from chirpsdk import ChirpConnect, CallbackSet, CHIRP_SDK_BUFFER_SIZE
+from chirpsdk import ChirpSDK, CallbackSet, CHIRP_SDK_BUFFER_SIZE
 
 
 class Callbacks(CallbackSet):
@@ -28,7 +26,7 @@ class Callbacks(CallbackSet):
                     data=payload.decode('utf-8'), ch=channel))
             elif self.args.hex:
                 print('Received: {data} [ch{ch}]'.format(
-                    data=str(payload), ch=channel))
+                    data=payload.hex(), ch=channel))
             else:
                 print('Received: {data} [ch{ch}]'.format(
                     data=list(payload), ch=channel))
@@ -36,9 +34,9 @@ class Callbacks(CallbackSet):
 
 def main(args):
     # ------------------------------------------------------------------------
-    # Initialise the Connect SDK.
+    # Initialise the Chirp SDK.
     # ------------------------------------------------------------------------
-    sdk = ChirpConnect()
+    sdk = ChirpSDK()
     print(str(sdk))
     if args.network_config:
         sdk.set_config_from_network()
@@ -72,7 +70,7 @@ if __name__ == '__main__':
     # Parse command-line arguments.
     # ------------------------------------------------------------------------
     parser = argparse.ArgumentParser(
-        description='Chirp Connect Audio Reader',
+        description='Chirp Audio Reader',
         epilog='Reads a .wav file containing Chirp audio payloads, and outputs any payloads found'
     )
     parser.add_argument('infile', help='Input WAV file to read')

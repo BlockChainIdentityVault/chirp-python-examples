@@ -5,22 +5,21 @@ Writes a chirp payload to an audio file.
 """
 import array as ar
 import argparse
-import os
 import sys
 import wave
 
 from chirpsdk import (
-    ChirpConnect,
-    CHIRP_CONNECT_STATE_SENDING,
+    ChirpSDK,
+    CHIRP_SDK_STATE_SENDING,
     CHIRP_SDK_BUFFER_SIZE
 )
 
 
 def main(args):
     # ------------------------------------------------------------------------
-    # Initialise the Connect SDK.
+    # Initialise the Chirp SDK.
     # ------------------------------------------------------------------------
-    sdk = ChirpConnect()
+    sdk = ChirpSDK()
     print(str(sdk))
     if args.network_config:
         sdk.set_config_from_network()
@@ -66,7 +65,7 @@ def main(args):
 
     sdk.send(payload)
 
-    while sdk.state == CHIRP_CONNECT_STATE_SENDING:
+    while sdk.state == CHIRP_SDK_STATE_SENDING:
         data = ar.array('h', [0] * CHIRP_SDK_BUFFER_SIZE)
         byte_data = bytearray(data.tobytes() if sys.version[0] == '3' else
                               data.tostring())
