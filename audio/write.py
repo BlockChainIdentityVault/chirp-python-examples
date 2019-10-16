@@ -49,9 +49,10 @@ def main(args):
     # ------------------------------------------------------------------------
     # Set transmission channel
     # ------------------------------------------------------------------------
-    if args.channel:
+    if args.channel is not None:
         if args.channel >= sdk.channel_count:
             raise ValueError('Channel %d is not available' % args.channel)
+        print('Writing to channel %d' % args.channel)
         sdk.transmission_channel = args.channel
 
     # ------------------------------------------------------------------------
