@@ -40,7 +40,7 @@ class Callbacks(CallbackSet):
 
 
 def main(block_name, input_device, output_device,
-         block_size, sample_rate):
+         block_size, sample_rate, channel):
 
     # Initialise Chirp SDK
     sdk = ChirpSDK(block=block_name)
@@ -59,6 +59,13 @@ def main(block_name, input_device, output_device,
 
     # Set callback functions
     sdk.set_callbacks(Callbacks())
+
+    # Set transmission channel for multichannel protocols
+    if args.channel is not None:
+        if args.channel >= sdk.channel_count:
+            raise ValueError('Channel %d is not available' % args.channel)
+        print('Writing to channel %d' % args.channel)
+        sdk.transmission_channel = args.channel
 
     # Generate random payload and send
     payload = sdk.random_payload()
@@ -82,11 +89,13 @@ if __name__ == '__main__':
         description='ChirpSDK Demo',
         epilog='Sends a random chirp payload, then continuously listens for chirps'
     )
-    parser.add_argument('-c', help='The configuration block [name] in your ~/.chirprc file (optional)')
-    parser.add_argument('-i', type=int, default=None, help='Input device index (optional)')
-    parser.add_argument('-o', type=int, default=None, help='Output device index (optional)')
-    parser.add_argument('-b', type=int, default=0, help='Block size (optional)')
-    parser.add_argument('-s', type=int, default=44100, help='Sample rate (optional)')
+    parser.add_argument('-c', '--channel', type=int, help='The channel to output data on')
+    parser.add_argument('-i', '--input-device', type=int, default=None, help='Input device index (optional)')
+    parser.add_argument('-o', '--output-device', type=int, default=None, help='Output device index (optional)')
+    parser.add_argument('-b', '--block-size', type=int, default=0, help='Block size (optional)')
+    parser.add_argument('-s', '--sample-rate', type=int, default=44100, help='Sample rate (optional)')
+    parser.add_argument('--config', type=str, help='The configuration block [name] in your ~/.chirprc file (optional)')
+    parser.add_argument('--network-config', action='store_true', help='Optionally download a config from the network')
     args = parser.parse_args()
 
-    main(args.c, args.i, args.o, args.b, args.s)
+    main(args.config, args.input_device, args.output_device, args.block_size, args.sample_rate, args.channel)
